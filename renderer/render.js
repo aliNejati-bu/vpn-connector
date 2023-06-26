@@ -5,7 +5,7 @@ const msgBox = document.getElementById('msg-box');
 async function setup() {
     const isConnectToWarp = await warp.status();
     if (isConnectToWarp === 1) {
-        warpBtn.innerText = 'DisConnect Warp';
+        warpBtn.innerText = 'Disconnect Warp';
         msgBox.innerText = 'Connected to Warp';
         msgBox.classList.add('is-success');
         msgBox.classList.remove('is-danger');
@@ -43,7 +43,7 @@ async function updateConnection() {
             .onclick = () => {
             console.log('clicked')
         }
-        warpBtn.innerText = 'DisConnect Warp';
+        warpBtn.innerText = 'Disconnect Warp';
         msgBox.innerText = 'Connected to Warp';
         msgBox.classList.add('is-success');
         msgBox.classList.remove('is-danger');

@@ -1,19 +1,24 @@
 const {contextBridge} = require('electron')
 const {runCommand} = require("./helpers");
 
-
+let last = 0;
 contextBridge.exposeInMainWorld('warp', {
     status: () => {
         return new Promise((resolve, reject) => {
 
             runCommand('warp-cli', ['status'],
                 (data) => {
-                    console.log(data);
-                    if (data.includes(' Connected')) {
-                        resolve(1);
-                    } else if(data.includes('Connecting')) {
+                    if (data === 'Success') {
+                        resolve(last);
+                    }
+                    if (data.includes('Connecting')) {
+                        last = -1;
                         resolve(-1);
-                    }else {
+                    } else if (data.includes('Connected')) {
+                        last = 1;
+                        resolve(1);
+                    } else {
+                        last = 0;
                         resolve(0);
                     }
                 },
