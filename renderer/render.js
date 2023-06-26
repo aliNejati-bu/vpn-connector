@@ -1,13 +1,19 @@
 const ssh = document.getElementById('ssh');
 const warpBtn = document.getElementById('warp');
-
+const msgBox = document.getElementById('msg-box');
 
 async function setup() {
     const isConnectToWarp = await warp.status();
     if (isConnectToWarp) {
         warpBtn.innerText = 'DisConnect Warp';
+        msgBox.innerText = 'Connected to Warp';
+        msgBox.classList.add('is-success');
+        msgBox.classList.remove('is-danger');
     } else {
         warpBtn.innerText = 'Connect To Warp';
+        msgBox.innerText = 'Disconnect Warp';
+        msgBox.classList.remove('is-success');
+        msgBox.classList.add('is-danger');
     }
     warpBtn.addEventListener('click', () => {
         connectDisconnect();
@@ -34,6 +40,9 @@ async function updateConnection() {
             console.log('clicked')
         }
         warpBtn.innerText = 'DisConnect Warp';
+        msgBox.innerText = 'Connected to Warp';
+        msgBox.classList.add('is-success');
+        msgBox.classList.remove('is-danger');
     } else {
         const NOTIFICATION_TITLE = 'Warp disconnected'
         const NOTIFICATION_BODY = 'Now your internet is not safe.'
@@ -43,6 +52,9 @@ async function updateConnection() {
             console.log('clicked')
         }
         warpBtn.innerText = 'Connect To Warp';
+        msgBox.innerText = 'Disconnect Warp';
+        msgBox.classList.remove('is-success');
+        msgBox.classList.add('is-danger');
     }
 }
 
