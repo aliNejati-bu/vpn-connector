@@ -4,16 +4,20 @@ const msgBox = document.getElementById('msg-box');
 
 async function setup() {
     const isConnectToWarp = await warp.status();
-    if (isConnectToWarp) {
+    if (isConnectToWarp === 1) {
         warpBtn.innerText = 'DisConnect Warp';
         msgBox.innerText = 'Connected to Warp';
         msgBox.classList.add('is-success');
         msgBox.classList.remove('is-danger');
-    } else {
+        warpBtn.classList.remove('is-loading');
+    } else if(isConnectToWarp === 0) {
         warpBtn.innerText = 'Connect To Warp';
         msgBox.innerText = 'Disconnect Warp';
         msgBox.classList.remove('is-success');
         msgBox.classList.add('is-danger');
+        warpBtn.classList.remove('is-loading');
+    }else {
+        warpBtn.classList.add('is-loading');
     }
     warpBtn.addEventListener('click', () => {
         connectDisconnect();
@@ -31,7 +35,7 @@ async function updateConnection() {
         return;
     }
     prev = isConnectToWarp;
-    if (isConnectToWarp) {
+    if (isConnectToWarp === 1) {
         const NOTIFICATION_TITLE = 'Warp Connected'
         const NOTIFICATION_BODY = 'Now your internet is safe.'
 
@@ -43,7 +47,8 @@ async function updateConnection() {
         msgBox.innerText = 'Connected to Warp';
         msgBox.classList.add('is-success');
         msgBox.classList.remove('is-danger');
-    } else {
+        warpBtn.classList.remove('is-loading');
+    } else if (isConnectToWarp === 0) {
         const NOTIFICATION_TITLE = 'Warp disconnected'
         const NOTIFICATION_BODY = 'Now your internet is not safe.'
 
@@ -55,6 +60,9 @@ async function updateConnection() {
         msgBox.innerText = 'Disconnect Warp';
         msgBox.classList.remove('is-success');
         msgBox.classList.add('is-danger');
+        warpBtn.classList.remove('is-loading');
+    }else {
+        warpBtn.classList.add('is-loading');
     }
 }
 

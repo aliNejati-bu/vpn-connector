@@ -8,10 +8,13 @@ contextBridge.exposeInMainWorld('warp', {
 
             runCommand('warp-cli', ['status'],
                 (data) => {
-                    if (data.includes('Disconnected')) {
-                        resolve(false);
-                    } else {
-                        resolve(true);
+                    console.log(data);
+                    if (data.includes(' Connected')) {
+                        resolve(1);
+                    } else if(data.includes('Connecting')) {
+                        resolve(-1);
+                    }else {
+                        resolve(0);
                     }
                 },
                 (err) => {
