@@ -1,14 +1,29 @@
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
-body{
-    overflow-y: hidden; /* Hide vertical scrollbar */
-    overflow-x: hidden; /* Hide horizontal scrollbar */
+body {
+    font-family: sans-serif;
 }
 
-.list-btn{
+.list-btn {
     padding: 10px;
+}
+
+.about-body {
+    background: #d5d5d5;
+}
+
+.about {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    gap: 10px;
+}
+.about .footer{
+    opacity: 0.5;
 }
